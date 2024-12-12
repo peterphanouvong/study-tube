@@ -21,7 +21,7 @@ const Section = z.object({
   text: z.string(),
   timestamp: z.number(),
 });
-export const Completion = z.object({
+const Completion = z.object({
   sections: z.array(Section),
 });
 

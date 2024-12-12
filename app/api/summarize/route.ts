@@ -1,7 +1,16 @@
-import { Completion } from "@/app/(app)/dashboard/summary";
 import { openai } from "@ai-sdk/openai";
 import { streamObject } from "ai";
 import { NextRequest } from "next/server";
+import { z } from "zod";
+
+const Section = z.object({
+  title: z.string(),
+  text: z.string(),
+  timestamp: z.number(),
+});
+const Completion = z.object({
+  sections: z.array(Section),
+});
 
 // Allow streaming responses up to 30 seconds
 
