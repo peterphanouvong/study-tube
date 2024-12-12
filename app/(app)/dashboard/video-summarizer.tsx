@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Copy, List, MoreHorizontal, Share2, Sparkles } from "lucide-react";
-export const VideoSummarizer = () => {
+export const VideoSummarizer = (props: { youtubeLink: string }) => {
   const handleSummarize = () => {
-    console.log("Summarizing video...");
+    console.log("Summarizing video...", props);
     // check how many summaries the user has left
     // if not enough, then show the pricing page / popup
   };
@@ -16,11 +16,11 @@ export const VideoSummarizer = () => {
       <div className="lg:col-span-2">
         {/* Video Player */}
         <div className="relative bg-black aspect-video w-full rounded-lg mb-4">
-          <img
+          {/* <img
             src="/api/placeholder/800/450"
             alt="Video thumbnail"
             className="w-full h-full object-cover"
-          />
+          /> */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
             <div className="flex items-center text-white">
               <span className="text-sm">0:01 / 2:26:12</span>
