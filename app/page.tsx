@@ -1,101 +1,128 @@
-import Image from "next/image";
+import { GoogleRegisterButton } from "@/components/google-register-button";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Chrome, Focus, Video } from "lucide-react";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-white">
+      <nav className="flex justify-between items-center px-6 py-4">
+        <div className="flex items-center gap-2">
+          <Video className="w-6 h-6 text-indigo-600" />
+          <span className="font-semibold text-xl">StudyTube</span>
+        </div>
+        <div className="flex gap-3">
+          {user ? (
+            <>
+              <Button variant={"outline"} asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+            </>
+          ) : (
+            <>
+              <GoogleRegisterButton />
+            </>
+          )}
+        </div>
+      </nav>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      <main className="max-w-4xl mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <div className="text-center mb-16 ">
+          <h1 className="text-7xl font-bold mb-4 tracking-tight">
+            Spend less time
+            <br />
+            on YouTube
+          </h1>
+          <p className="text-gray-600 mb-8 max-w-md mx-auto">
+            StudyTube makes it easy to create smart video summaries, remove
+            distractions and focus on learning.
+          </p>
+          <Button className="bg-indigo-600 hover:bg-indigo-700">
+            <Chrome className="mr-2 h-4 w-4" /> Add to Chrome
+          </Button>
+        </div>
+
+        {/* Features Section */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <Video className="w-8 h-8 text-indigo-600" />
+            </div>
+            <h3 className="font-semibold mb-2">Smart summaries</h3>
+            <p className="text-gray-600 text-sm">
+              Concise summaries of videos with key points and timestamps
+            </p>
+          </div>
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <Focus className="w-8 h-8 text-indigo-600" />
+            </div>
+            <h3 className="font-semibold mb-2">Zero distractions</h3>
+            <p className="text-gray-600 text-sm">
+              Hide your home page, recommended videos, comments and more
+            </p>
+          </div>
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <Chrome className="w-8 h-8 text-indigo-600" />
+            </div>
+            <h3 className="font-semibold mb-2">Zen mode</h3>
+            <p className="text-gray-600 text-sm">
+              Focus on the video player with a clean and minimal interface
+            </p>
+          </div>
+        </div>
+
+        {/* Screenshot Section */}
+        <Card className="mb-16">
+          <CardContent className="p-0">
+            <img
+              src="/api/placeholder/800/450"
+              alt="StudyTube Interface"
+              className="w-full rounded-lg"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </CardContent>
+        </Card>
+
+        {/* Environment Design Section */}
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          <div>
+            <h2 className="text-2xl font-bold mb-4">
+              Optimise your YouTube
+              <br />
+              experience for studying
+            </h2>
+          </div>
+          <div>
+            <p className="text-gray-600 mb-4">
+              In Atomic Habits, James Clear describes a strategy called
+              environment design that involves changing your surroundings to
+              make good habits easier and bad habits more difficult.
+            </p>
+            <p className="text-gray-600">
+              You can design your YouTube environment to make it easier to focus
+              on learning with StudyTube.
+            </p>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center">
+          <h2 className="text-4xl font-bold mb-4">Get started now</h2>
+          <p className="text-gray-600 mb-8">
+            Stop getting lost in YouTube rabbit holes and get studying with
+            StudyTube.
+          </p>
+          <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700">
+            Start Studying
+          </Button>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
