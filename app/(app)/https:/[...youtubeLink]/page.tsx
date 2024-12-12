@@ -1,4 +1,4 @@
-import { YoutubeTranscript } from "youtube-transcript";
+import { Innertube } from "youtubei.js";
 import { EnterUrlForm } from "../../dashboard/enter-url-form";
 import { VideoSummarizer } from "../../dashboard/video-summarizer";
 
@@ -6,19 +6,34 @@ export default async function SummarizeYoutubeVideo(props: {
   searchParams: { v: string };
   params: { youtubeLink: string[] };
 }) {
+  const innertube = await Innertube.create({
+    lang: "en",
+    retrieve_player: false,
+  });
   const response = await fetch(
-    `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${props.searchParams.v}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`
+    `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${props.searchParams.v}&key=${process.env.YOUTUBE_API_KEY}`
   ).then((res) => res.json());
 
-  const rawTranscript = await YoutubeTranscript.fetchTranscript(
-    props.searchParams.v
-  );
-  const alteredTranscript = rawTranscript.map((transcript) => {
-    return {
-      offset: transcript.offset,
-      text: transcript.text,
-    };
-  });
+  const fetchTranscript = async (): Promise<
+    { offset: string; text: string }[]
+  > => {
+    try {
+      const info = await innertube.getInfo(props.searchParams.v);
+      const transcriptData = await info.getTranscript();
+      // @ts-expect-error dw lol
+      return transcriptData?.transcript?.content?.body?.initial_segments.map(
+        (segment) => ({
+          offset: parseFloat(segment.start_ms) / 1000,
+          text: segment.snippet.text,
+        })
+      );
+    } catch (error) {
+      console.error("Error fetching transcript:", error);
+      throw error;
+    }
+  };
+
+  const transcript = await fetchTranscript();
 
   return (
     <div>
@@ -26,10 +41,8 @@ export default async function SummarizeYoutubeVideo(props: {
         url={props.params.youtubeLink + "?v=" + props.searchParams.v}
       />
       <div className="my-4">
-        <VideoSummarizer
-          transcript={alteredTranscript}
-          video={response.items[0]}
-        />
+        {/* @ts-expect-error dw lol */}
+        <VideoSummarizer transcript={transcript} video={response.items[0]} />
       </div>
     </div>
   );

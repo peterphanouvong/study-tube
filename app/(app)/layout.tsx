@@ -27,8 +27,6 @@ export default async function Layout(props: {
   const user = await getUser();
 
   if (!user) {
-    console.log("redirecting to login", props.params?.youtubeLink);
-    console.log("redirecting to login", props.params);
     redirect(
       "/api/auth/login?connection_id=conn_0193b2c61eaf67e9e82e2204cd5ac002"
     );
