@@ -11,7 +11,7 @@ export const EnterUrlForm = (props: { url?: string }) => {
   };
   return (
     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'formData' implicitly has an 'any' type.
-    <form action={handleSubmit} className="flex gap-2">
+    <form action={handleSubmit} className="flex gap-2 max-w-lg">
       <Input
         name="url"
         type="text"

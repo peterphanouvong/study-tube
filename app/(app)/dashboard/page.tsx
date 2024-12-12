@@ -39,14 +39,18 @@ export default async function Dashboard() {
           </DialogHeader>
 
           <DialogFooter>
-            <DialogClose asChild>
-              <Button variant={"ghost"}>Cancel</Button>
-            </DialogClose>
-            <Button asChild className="bg-indigo-600 hover:bg-indigo-700">
+            <Button
+              autoFocus={true}
+              asChild
+              className="bg-indigo-600 hover:bg-indigo-700"
+            >
               <Link href="https://youtube.com" target="_blank">
                 Go to YouTube <RiExternalLinkLine className="h-4 w-4" />
               </Link>
             </Button>
+            <DialogClose asChild>
+              <Button variant={"secondary"}>Cancel</Button>
+            </DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>
