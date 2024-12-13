@@ -11,10 +11,11 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { experimental_useObject as useObject } from "ai/react";
 import { Clock } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RiSparkling2Line } from "react-icons/ri";
 import Markdown from "react-markdown";
 import { z } from "zod";
+import rehypeRaw from "rehype-raw";
 
 const Section = z.object({
   title: z.string(),
@@ -74,56 +75,83 @@ export const Summary = (props: {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const readingTime = useMemo(() => {
+    const wordCount =
+      summary?.sections?.reduce((acc, section) => {
+        return acc + (section?.text ? section.text.split(" ").length : 0);
+      }, 0) || 0;
+
+    return Math.ceil(wordCount / 200);
+  }, [summary]);
+
   return (
     <div>
-      {!summary?.sections?.length && (
-        <Button
-          onClick={() => submit(JSON.stringify(props.transcript))}
-          className="bg-indigo-600 hover:bg-indigo-700"
-        >
-          <RiSparkling2Line className="mr-2" />
-          Summarize
-        </Button>
-      )}
+      <div className="py-4">
+        {readingTime > 0 && (
+          <span className="text-muted-foreground text-sm">
+            {readingTime} min read
+          </span>
+        )}
+      </div>
+      <div className="min-w-[400px] max-w-xl">
+        {!summary?.sections?.length && (
+          <Button
+            onClick={() => submit(JSON.stringify(props.transcript))}
+            className="bg-indigo-600 hover:bg-indigo-700"
+          >
+            <RiSparkling2Line className="mr-2" />
+            Summarize
+          </Button>
+        )}
 
-      <ScrollArea className="h-[520px] overflow-auto relative">
-        <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white to-transparent z-10" />
-        <div className="space-y-4 ">
-          {summary?.sections?.map((section, idx) => {
-            return (
-              <div key={idx}>
-                <Card className="overflow-hidden">
-                  <CardHeader>
-                    <CardTitle>{section?.title}</CardTitle>
-                    {section?.timestamp && section.timestamp > 0 && (
-                      <CardDescription>
-                        <Button
-                          onClick={skipToTimestamp.bind(
-                            null,
-                            section?.timestamp
-                          )}
-                          className="bg-transparent p-0 flex items-center"
-                          variant={"link"}
-                        >
-                          <Clock className="h-4 w-4 mr-2" />
-                          {new Date(section?.timestamp * 1000)
-                            .toISOString()
-                            .slice(11, 19)}
-                        </Button>
-                      </CardDescription>
-                    )}
-                  </CardHeader>
+        <ScrollArea className="h-[520px] overflow-auto relative">
+          <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white to-transparent z-10" />
+          <div className="space-y-4 ">
+            {summary?.sections?.map((section, idx) => {
+              return (
+                <div key={idx}>
+                  <Card className="overflow-hidden">
+                    <CardHeader>
+                      <CardTitle>{section?.title}</CardTitle>
+                      <CardTimestamp
+                        skipToTimestamp={skipToTimestamp}
+                        timestamp={section?.timestamp}
+                      />
+                    </CardHeader>
 
-                  <CardContent className="markdown-body text-sm">
-                    <Markdown>{section?.text}</Markdown>
-                  </CardContent>
-                </Card>
-              </div>
-            );
-          })}
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent z-10" />
-      </ScrollArea>
+                    <CardContent className="markdown-body text-sm">
+                      <Markdown rehypePlugins={[rehypeRaw]}>
+                        {section?.text}
+                      </Markdown>
+                    </CardContent>
+                  </Card>
+                </div>
+              );
+            })}
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent z-10" />
+        </ScrollArea>
+      </div>
     </div>
+  );
+};
+
+const CardTimestamp = (props: {
+  timestamp?: number;
+  skipToTimestamp: (seconds: number) => void;
+}) => {
+  if (!props?.timestamp) return null;
+  return (
+    <CardDescription>
+      <Button
+        onClick={props.skipToTimestamp.bind(null, props.timestamp)}
+        className="bg-transparent p-0 flex items-center"
+        variant={"link"}
+      >
+        <Clock className="h-4 w-4 mr-2" />
+        {new Date(props.timestamp * 1000).toISOString().slice(11, 19)}
+      </Button>
+    </CardDescription>
   );
 };

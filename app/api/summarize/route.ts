@@ -15,7 +15,7 @@ const Completion = z.object({
 // Allow streaming responses up to 30 seconds
 
 export async function POST(req: NextRequest) {
-  const transcript = req.json();
+  const transcript = await req.json();
   const searchParams = req.nextUrl.searchParams;
   const youtuber = searchParams.get("youtuber");
   const result = streamObject({
@@ -121,6 +121,13 @@ Step 1: Start every section with a single-sentence opener.
   • Is a series of small, rapid-fire sections easiest? Do that.
 
   Your North Star is the reader's enjoyment.
+
+  --
+  Step 5: Highlight the most important information.
+  
+  When generating the text for each section, make sure to highlight the most important information. This will help the reader quickly understand the main points of the video.
+  You can highlight the text by using the Markdown syntax "<mark>text</mark>".
+
 
 Your response should be in this format:
 {
