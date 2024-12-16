@@ -138,5 +138,5 @@ Your response should be in this format:
   }[]
 }
 
-The first section should be a TLDR (Too Long, Didn't Read) summary of the video that covers the main points of the video in a few sentences.
+The first section should be a TLDR (Too Long, Didn't Read) summary of the video that covers the main point of the video in one or two sentences.
 `;

@@ -94,7 +94,7 @@ export const Summary = (props: {
           </span>
         )}
       </div>
-      <div className="min-w-[400px] max-w-xl">
+      <div className="md:min-w-[400px] max-w-xl">
         {!summary?.sections?.length && (
           <Button
             onClick={() => submit(JSON.stringify(props.transcript))}
