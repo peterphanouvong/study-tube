@@ -15,7 +15,11 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { RiExternalLinkLine } from "react-icons/ri";
+import {
+  RiBankCardLine,
+  RiExternalLinkLine,
+  RiLogoutBoxLine,
+} from "react-icons/ri";
 
 export default async function Layout(props: {
   params?: {
@@ -63,14 +67,16 @@ export default async function Layout(props: {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href={"/billing"}>Billing</Link>
+                <Link href={"/billing"}>
+                  <RiBankCardLine className="mr-2" /> Plans and billing
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <LogoutLink>Logout</LogoutLink>
+                <LogoutLink>
+                  <RiLogoutBoxLine className="mr-2" /> Logout
+                </LogoutLink>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
