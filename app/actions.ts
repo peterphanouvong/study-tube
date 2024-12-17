@@ -1,8 +1,10 @@
 "use server";
 
+import { createClient } from "@/lib/supabase/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { init, Users } from "@kinde/management-api-js";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export const setHasPaid = async (userId: string, hasPaid: boolean) => {
   init();
@@ -15,4 +17,11 @@ export const setHasPaid = async (userId: string, hasPaid: boolean) => {
 
   await refreshTokens();
   revalidatePath("/dashboard");
+};
+
+export const addUserToDb = async (userId: string) => {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  await supabase.from("profiles").insert([{ id: userId }]);
 };

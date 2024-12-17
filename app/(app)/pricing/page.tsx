@@ -24,7 +24,7 @@ const PricingPage = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            Choose Your Focus Plan
+            Choose Your Plan
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Transform your YouTube experience with smart summaries and
