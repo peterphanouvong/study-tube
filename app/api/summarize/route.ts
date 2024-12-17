@@ -1,4 +1,6 @@
+import { consumeSummary } from "@/app/actions";
 import { openai } from "@ai-sdk/openai";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { streamObject } from "ai";
 import { NextRequest } from "next/server";
 import { z } from "zod";
@@ -15,6 +17,14 @@ const Completion = z.object({
 // Allow streaming responses up to 30 seconds
 
 export async function POST(req: NextRequest) {
+  const { getUser } = getKindeServerSession();
+
+  const user = await getUser();
+
+  if (!user) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   const transcript = await req.json();
   const searchParams = req.nextUrl.searchParams;
   const youtuber = searchParams.get("youtuber");
@@ -34,8 +44,9 @@ export async function POST(req: NextRequest) {
       },
     ],
     schema: Completion,
-    // response_format: zodResponseFormat(Completion, "completion"),
   });
+
+  await consumeSummary(user.id);
 
   return result.toTextStreamResponse();
 }

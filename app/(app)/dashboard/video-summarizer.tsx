@@ -5,6 +5,7 @@ import { Summary } from "./summary";
 export const VideoSummarizer = (props: {
   video: { id: string; snippet: { title: string; channelTitle: string } };
   transcript: { text: string; offset: number }[];
+  canSummarize: boolean;
 }) => {
   return (
     <div className="max-w-7xl mx-auto p-6 flex flex-col lg:flex-row gap-6 rounded-lg shadow border">
@@ -41,7 +42,11 @@ export const VideoSummarizer = (props: {
 
         {/* Summary Sections */}
         <div className="space-y-6">
-          <Summary video={props.video} transcript={props.transcript} />
+          <Summary
+            video={props.video}
+            transcript={props.transcript}
+            canSummarize={props.canSummarize}
+          />
         </div>
       </div>
     </div>

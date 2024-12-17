@@ -8,9 +8,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { createClient } from "@/lib/supabase/server";
 import { Check } from "lucide-react";
+import { cookies } from "next/headers";
 
-const PricingPage = () => {
+const PricingPage = async () => {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const profiles = await supabase.from("profiles").select();
+
+  console.log(profiles);
+
   const features = [
     "AI-powered video summarization",
     "Smart timestamp navigation",

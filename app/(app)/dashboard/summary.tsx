@@ -16,6 +16,7 @@ import { RiSparkling2Line } from "react-icons/ri";
 import Markdown from "react-markdown";
 import { z } from "zod";
 import rehypeRaw from "rehype-raw";
+import Link from "next/link";
 
 const Section = z.object({
   title: z.string(),
@@ -29,6 +30,7 @@ const Completion = z.object({
 export const Summary = (props: {
   video: { id: string; snippet: { title: string; channelTitle: string } };
   transcript: { text: string; offset: number }[];
+  canSummarize: boolean;
 }) => {
   const [player, setPlayer] = useState(null);
 
@@ -95,14 +97,23 @@ export const Summary = (props: {
         )}
       </div>
       <div className="md:min-w-[400px] max-w-xl">
-        {!summary?.sections?.length && (
-          <Button
-            onClick={() => submit(JSON.stringify(props.transcript))}
-            className="bg-indigo-600 hover:bg-indigo-700"
-          >
-            <RiSparkling2Line className="mr-2" />
-            Summarize
-          </Button>
+        {props.canSummarize ? (
+          !summary?.sections?.length && (
+            <Button
+              onClick={() => submit(JSON.stringify(props.transcript))}
+              className="bg-indigo-600 hover:bg-indigo-700"
+            >
+              <RiSparkling2Line className="mr-2" />
+              Summarize
+            </Button>
+          )
+        ) : (
+          <div>
+            <p className="mb-2">You have no more free summaries</p>
+            <Button asChild>
+              <Link href="/pricing">Subscribe to summarize</Link>
+            </Button>
+          </div>
         )}
 
         <ScrollArea className="h-[520px] overflow-auto relative">

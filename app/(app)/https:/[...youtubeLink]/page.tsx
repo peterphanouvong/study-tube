@@ -1,11 +1,14 @@
 import { Innertube } from "youtubei.js";
 import { EnterUrlForm } from "../../dashboard/enter-url-form";
+import { getCanSummarize } from "@/app/actions";
 import { VideoSummarizer } from "../../dashboard/video-summarizer";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default async function SummarizeYoutubeVideo(props: {
   searchParams: { v: string };
   params: { youtubeLink: string[] };
 }) {
+  const { getUser } = getKindeServerSession();
   const innertube = await Innertube.create({
     lang: "en",
     retrieve_player: false,
@@ -34,6 +37,8 @@ export default async function SummarizeYoutubeVideo(props: {
   };
 
   const transcript = await fetchTranscript();
+  const user = await getUser();
+  const canSummarize = await getCanSummarize(user.id);
 
   return (
     <div>
@@ -41,8 +46,12 @@ export default async function SummarizeYoutubeVideo(props: {
         url={props.params.youtubeLink + "?v=" + props.searchParams.v}
       />
       <div className="my-4">
-        {/* @ts-expect-error dw lol */}
-        <VideoSummarizer transcript={transcript} video={response.items[0]} />
+        <VideoSummarizer
+          // @ts-expect-error dw lol
+          transcript={transcript}
+          video={response.items[0]}
+          canSummarize={canSummarize}
+        />
       </div>
     </div>
   );

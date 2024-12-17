@@ -13,6 +13,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { RiExternalLinkLine } from "react-icons/ri";
 import { EnterUrlForm } from "./enter-url-form";
+import { getCanSummarize } from "@/app/actions";
 
 export default async function Dashboard() {
   const { getUser } = getKindeServerSession();
@@ -26,6 +27,8 @@ export default async function Dashboard() {
       "/api/auth/login?connection_id=conn_0193b2c61eaf67e9e82e2204cd5ac002"
     );
   }
+
+  const canSummarize = await getCanSummarize(user.id);
 
   return (
     <div>
@@ -59,7 +62,16 @@ export default async function Dashboard() {
         Summarize YouTube video
       </h2>
 
-      <EnterUrlForm />
+      {canSummarize ? (
+        <EnterUrlForm />
+      ) : (
+        <div>
+          <p className="mb-2">You have no more free summaries</p>
+          <Button asChild>
+            <Link href="/pricing">Subscribe to summarize</Link>
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

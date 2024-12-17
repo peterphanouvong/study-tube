@@ -3,7 +3,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export const POST = async () => {
   const returnUrl =
-    "http://localhost:3000/api/checkout-return?session_id={CHECKOUT_SESSION_ID}";
+    "http://localhost:3000/api/checkout-return?session_id={CHECKOUT_SESSION_ID}&type=monthly";
 
   try {
     // Create Checkout Sessions from body params.

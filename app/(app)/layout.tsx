@@ -36,6 +36,9 @@ export default async function Layout(props: {
       <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
           <Logo />
+          <Button variant={"link"} asChild>
+            <Link href="/dashboard">Dashboard</Link>
+          </Button>
         </div>
         <div className="flex gap-4 items-center">
           <Button variant={"link"} asChild>
@@ -62,8 +65,9 @@ export default async function Layout(props: {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={"/billing"}>Billing</Link>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <LogoutLink>Logout</LogoutLink>
