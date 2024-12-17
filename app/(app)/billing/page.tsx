@@ -80,7 +80,10 @@ export default async function Billing() {
                 <span>Free Summaries Used</span>
                 <span>{freeSummaries} free summaries remaining</span>
               </div>
-              <Progress value={(5 - freeSummaries / 5) * 100} className="h-2" />
+              <Progress
+                value={((5 - freeSummaries) / 5) * 100}
+                className="h-2"
+              />
               <p className="text-sm text-gray-500">
                 {5 - freeSummaries} of {5} credits used
               </p>
