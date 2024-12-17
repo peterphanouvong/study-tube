@@ -1,4 +1,4 @@
-import { consumeSummary } from "@/app/actions";
+import { consumeSummary, getCanSummarize } from "@/app/actions";
 import { openai } from "@ai-sdk/openai";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { streamObject } from "ai";
@@ -22,6 +22,11 @@ export async function POST(req: NextRequest) {
   const user = await getUser();
 
   if (!user) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
+  const canSummarize = await getCanSummarize(user.id);
+  if (!canSummarize) {
     return new Response("Unauthorized", { status: 401 });
   }
 
