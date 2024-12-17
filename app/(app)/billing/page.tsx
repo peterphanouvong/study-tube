@@ -6,7 +6,7 @@ import Link from "next/link";
 export default async function Billing() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  const freeSummaries = await getNumFreeSummaries(user.id);
+  const freeSummaries = await getNumFreeSummaries(user?.id);
   const plan = await getPlan(user?.id);
   return (
     <div>
