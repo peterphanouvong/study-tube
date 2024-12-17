@@ -12,8 +12,36 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
-import { plans } from "../pricing/page";
-
+const plans = [
+  {
+    id: "monthly",
+    name: "Monthly",
+    description: "Pay month-to-month, cancel anytime",
+    price: 5,
+    features: [
+      "AI-powered video summarization",
+      "Smart timestamp navigation",
+      "Distraction-free viewing mode",
+      "Custom UI controls",
+      "Background playback",
+    ],
+  },
+  {
+    id: "one-time",
+    name: "Lifetime Access",
+    description: "One-time payment, forever access",
+    price: 39,
+    features: [
+      "AI-powered video summarization",
+      "Smart timestamp navigation",
+      "Distraction-free viewing mode",
+      "Custom UI controls",
+      "Background playback",
+      "Lifetime updates included",
+    ],
+    discount: "40% OFF",
+  },
+];
 export default async function Billing() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();

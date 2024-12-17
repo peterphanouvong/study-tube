@@ -11,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 
-export const plans = [
+const plans = [
   {
     id: "monthly",
     name: "Monthly",
