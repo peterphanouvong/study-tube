@@ -23,5 +23,5 @@ export const addUserToDb = async (userId: string) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  await supabase.from("profiles").insert([{ id: userId }]);
+  await supabase.from("profiles").insert([{ kinde_id: userId }]);
 };
