@@ -101,7 +101,7 @@ export const Summary = (props: {
           !summary?.sections?.length && (
             <Button
               onClick={() => submit(JSON.stringify(props.transcript))}
-              className="bg-indigo-600 hover:bg-indigo-700"
+              className="bg-blue-600 hover:bg-blue-700"
             >
               <RiSparkling2Line className="mr-2" />
               Summarize

@@ -45,7 +45,7 @@ export default async function Dashboard() {
             <Button
               autoFocus={true}
               asChild
-              className="bg-indigo-600 hover:bg-indigo-700"
+              className="bg-blue-600 hover:bg-blue-700"
             >
               <Link href="https://youtube.com" target="_blank">
                 Go to YouTube <RiExternalLinkLine className="h-4 w-4" />

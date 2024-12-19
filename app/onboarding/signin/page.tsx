@@ -7,7 +7,7 @@ export default function SignIn() {
         <h1 className="text-7xl font-bold tracking-tight">
           Successfully installed
           <br />
-          <span className="text-indigo-600">StudyTube</span>
+          <span className="text-blue-600">StudyTube</span>
         </h1>
       </div>
 

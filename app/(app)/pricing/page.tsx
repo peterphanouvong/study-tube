@@ -62,7 +62,7 @@ const PricingPage = async () => {
             <Card
               key={plan.name}
               className={cn({
-                "border-indigo-200 bg-indigo-50/50":
+                "border-blue-200 bg-blue-50/50":
                   plan.name === "Lifetime Access",
                 "relative flex flex-col border-2": true,
               })}
@@ -109,7 +109,7 @@ const PricingPage = async () => {
                     role="link"
                     className={cn({
                       "w-full": true,
-                      "bg-indigo-600 hover:bg-indigo-700":
+                      "bg-blue-600 hover:bg-blue-700":
                         plan.name === "Lifetime Access",
                     })}
                     size="lg"
@@ -156,7 +156,7 @@ const PricingPage = async () => {
             </CardFooter>
           </Card>
 
-          <Card className="relative flex flex-col border-2 border-indigo-200 bg-indigo-50/50">
+          <Card className="relative flex flex-col border-2 border-blue-200 bg-blue-50/50">
             <div className="absolute -top-3 right-4">
               <Badge variant="destructive" className="bg-red-500">
                 40% OFF
@@ -197,7 +197,7 @@ const PricingPage = async () => {
                 <Button
                   type="submit"
                   role="link"
-                  className="w-full bg-indigo-600 hover:bg-indigo-700"
+                  className="w-full bg-blue-600 hover:bg-blue-700"
                   size="lg"
                 >
                   Get Lifetime Access
