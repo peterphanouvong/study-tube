@@ -1,17 +1,10 @@
 import { GoogleRegisterButton } from "@/components/google-register-button";
-import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import Image from "next/image";
 import Link from "next/link";
 import { FaChrome } from "react-icons/fa6";
-import {
-  RiDashboard3Line,
-  RiExternalLinkLine,
-  RiFocusMode,
-  RiHeadphoneFill,
-  RiSparkling2Line,
-} from "react-icons/ri";
+import { RiDashboard3Line, RiStarFill } from "react-icons/ri";
 
 export default async function Home() {
   const { getUser } = getKindeServerSession();
@@ -20,16 +13,16 @@ export default async function Home() {
     <div className="min-h-screen bg-white">
       <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
-          <Logo />
+          <Link
+            href="/"
+            className="text-xl tracking-tighter font-bold font-spaceGrotesk"
+          >
+            StudyTube
+          </Link>
         </div>
         <div className="flex gap-3">
           {user ? (
             <>
-              <Button variant={"ghost"} asChild>
-                <Link href="https://youtube.com">
-                  <RiExternalLinkLine className="mr-2" /> YouTube
-                </Link>
-              </Button>
               <Button variant={"outline"} asChild>
                 <Link href="/dashboard">
                   <RiDashboard3Line className="mr-2" /> Dashboard
@@ -44,109 +37,159 @@ export default async function Home() {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-4 py-12">
+      <main className="max-w-7xl mx-auto px-4 py-12">
         {/* Hero Section */}
-        <div className="text-center mb-16 ">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-4 tracking-tight my-12">
-            Spend less time
-            <br />
-            on YouTube
-          </h1>
-          <p className="text-gray-600 mb-8 max-w-md mx-auto">
-            StudyTube makes it easy to create smart video summaries, remove
-            distractions and focus on learning.
-          </p>
-          <Button className="bg-indigo-600 hover:bg-indigo-700" asChild>
-            <Link
-              target="_blank"
-              href="https://chromewebstore.google.com/detail/studytube-youtube-product/fejkjeggadgppepeoemfbebnmanikmlb"
+        <div className="flex gap-12 mt-32">
+          <div className="text-left pt-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="text-xl">5.0</div>
+              <div className="flex items-center gap-1">
+                <RiStarFill className="w-5 h-5" />
+                <RiStarFill className="w-5 h-5" />
+                <RiStarFill className="w-5 h-5" />
+                <RiStarFill className="w-5 h-5" />
+                <RiStarFill className="w-5 h-5" />
+              </div>
+            </div>
+            <h1 className="text-5xl md:text-[80px] font-bold tracking-tighter mb-9 font-spaceGrotesk">
+              Stop <span className="text-blue-500">wasting</span> your
+              <br /> time on YouTube
+            </h1>
+            <p className="text-gray-600 mb-9 max-w-lg text-left text-lg">
+              StudyTube makes it easy to create smart video summaries, remove
+              distractions and focus on learning.
+            </p>
+            <Button
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 h-12 text-xl"
+              asChild
             >
-              <FaChrome className="mr-2 h-4 w-4" /> Add to Chrome
-            </Link>
-          </Button>
+              <Link
+                target="_blank"
+                href="https://chromewebstore.google.com/detail/studytube-youtube-product/fejkjeggadgppepeoemfbebnmanikmlb"
+              >
+                <FaChrome className="mr-2 h-4 w-4" /> Try for free!
+              </Link>
+            </Button>
+          </div>
+
+          <div className="flex-1">
+            <Image
+              src="/studytube-hero.png"
+              alt="StudyTube"
+              className="w-[532px] h-auto"
+              width={1000}
+              height={1000}
+            />
+          </div>
         </div>
 
         {/* Features Section */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="text-left">
-            <div className="flex justify-left mb-4">
-              <RiSparkling2Line className="w-6 h-6 text-indigo-600" />
-            </div>
-            <h3 className="font-semibold mb-2">Smart summaries</h3>
-            <p className="text-gray-600 text-sm">
-              Concise summaries of videos with key points and timestamps
+        <div className="mt-48">
+          <div className="flex justify-between mb-12">
+            <h2 className="text-5xl tracking-tighter font-spaceGrotesk font-bold">
+              Get more from less.
+            </h2>
+
+            <p className="max-w-xs text-xl">
+              Save time by generating concise AI summaries
             </p>
           </div>
-          <div className="text-left">
-            <div className="flex justify-left mb-4">
-              <RiFocusMode className="w-6 h-6 text-indigo-600" />
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="border rounded-2xl col-span-2 p-10">
+              {/* image placeholder */}
+              <div className="w-full h-[700px] bg-gray-200 rounded-2xl mb-11"></div>
+              <div className="flex justify-between items-center">
+                <h3 className="text-3xl font-bold mb-4 font-spaceGrotesk">
+                  Turn a one hour video into
+                  <br />a one minute summary
+                </h3>
+                <Button
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 h-12 text-xl"
+                  asChild
+                >
+                  <Link
+                    target="_blank"
+                    href="https://chromewebstore.google.com/detail/studytube-youtube-product/fejkjeggadgppepeoemfbebnmanikmlb"
+                  >
+                    <FaChrome className="mr-2 h-4 w-4" /> Try for free!
+                  </Link>
+                </Button>
+              </div>
             </div>
-            <h3 className="font-semibold mb-2">Zero distractions</h3>
-            <p className="text-gray-600 text-sm">
-              Hide your home page, recommended videos, comments and more
-            </p>
-          </div>
-          <div className="text-left">
-            <div className="flex justify-left mb-4">
-              <RiHeadphoneFill className="w-6 h-6 text-indigo-600" />
+            <div className="border rounded-2xl p-10">
+              <div className="w-full h-[400px] bg-gray-200 rounded-2xl mb-11"></div>
+              <h3 className="text-3xl font-bold mb-4 font-spaceGrotesk">
+                Get a TLDR
+              </h3>
+              <p className="text-xl">Get straight to the point with a TLDR</p>
             </div>
-            <h3 className="font-semibold mb-2">Zen mode</h3>
-            <p className="text-gray-600 text-sm">
-              Focus on the video player with a clean and minimal interface
-            </p>
+            <div className="border rounded-2xl p-10">
+              <div className="w-full h-[400px] bg-gray-200 rounded-2xl mb-11"></div>
+              <h3 className="text-3xl font-bold mb-4 font-spaceGrotesk">
+                Skip to key moments
+              </h3>
+              <p className="text-xl">
+                Use timestamps to skip to specific sections
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Screenshot Section */}
-        <Card className="mb-16">
-          <CardContent className="p-0">
-            <video
-              controls
-              className="w-full h-auto rounded-lg shadow-lg"
-              width="2481"
-              height="1626"
-              muted
-            >
-              <source src="/studytube.mp4" type="video/mp4" />
-            </video>
-          </CardContent>
-        </Card>
-
-        {/* Environment Design Section */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <div>
-            <h2 className="text-2xl font-bold mb-4">
-              Optimise your YouTube
-              <br />
-              experience for studying
+        <div className="mt-48">
+          <div className="flex justify-between mb-12">
+            <h2 className="text-5xl tracking-tighter font-spaceGrotesk font-bold">
+              Design your YouTube
             </h2>
+
+            <p className="max-w-md text-xl">
+              Hide your home page, recommended videos, comments and more
+            </p>
           </div>
-          <div>
-            <p className="text-gray-600 mb-4">
-              In Atomic Habits, James Clear describes a strategy called
-              environment design that involves changing your surroundings to
-              make good habits easier and bad habits more difficult.
-            </p>
-            <p className="text-gray-600">
-              You can design your YouTube environment to make it easier to focus
-              on learning with StudyTube.
-            </p>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="border rounded-2xl col-span-2 p-10">
+              {/* image placeholder */}
+              <div className="w-full h-[700px] bg-gray-200 rounded-2xl mb-11"></div>
+              <div className="flex justify-between items-center"></div>
+            </div>
+            <div className="border rounded-2xl p-10">
+              <div className="w-full h-[400px] bg-gray-200 rounded-2xl mb-11"></div>
+              <h3 className="text-3xl font-bold mb-4 font-spaceGrotesk">
+                Focus modes
+              </h3>
+              <p className="text-xl">Get locked-in with focus modes</p>
+            </div>
+            <div className="border rounded-2xl p-10">
+              <div className="w-full h-[400px] bg-gray-200 rounded-2xl mb-11"></div>
+              <h3 className="text-3xl font-bold mb-4 font-spaceGrotesk">
+                Custom settings
+              </h3>
+              <p className="text-xl">Choose what you want to see</p>
+            </div>
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="text-center">
-          <h2 className="text-4xl font-bold mb-4">Get started now</h2>
+        <div className="text-center mt-60 mb-20">
+          <h2 className="text-5xl tracking-tighter font-spaceGrotesk font-bold mb-6">
+            Get started now
+          </h2>
           <p className="text-gray-600 mb-8">
-            Stop getting lost in YouTube rabbit holes and get studying with
-            StudyTube.
+            Optimise your YouTube experience with StudyTube
           </p>
-          <Button className="bg-indigo-600 hover:bg-indigo-700" asChild>
+          <Button
+            size="lg"
+            className="bg-blue-600 hover:bg-blue-700 h-12 text-xl"
+            asChild
+          >
             <Link
               target="_blank"
               href="https://chromewebstore.google.com/detail/studytube-youtube-product/fejkjeggadgppepeoemfbebnmanikmlb"
             >
-              <FaChrome className="mr-2 h-4 w-4" /> Add to Chrome
+              <FaChrome className="mr-2 h-4 w-4" /> Try for free!
             </Link>
           </Button>
         </div>

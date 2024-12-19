@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Rethink_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Space_Grotesk } from "next/font/google";
 
 // If loading a variable font, you don't need to specify the font weight
-const rethink = Rethink_Sans({
+const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-bricolage-grotesque",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space-grotesk",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +28,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rethink.className} antialiased`}>{children}</body>
+      <body
+        className={`${bricolageGrotesque.className} ${bricolageGrotesque.variable} ${spaceGrotesk.variable} antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

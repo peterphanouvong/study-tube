@@ -14,7 +14,7 @@ export const POST = async () => {
       line_items: [
         {
           // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-          price: "price_1QUh9hIqnjgcSWvmohdAQIU7",
+          price: "price_1QUgusIqnjgcSWvm3v0f8ry5",
           quantity: 1,
         },
       ],

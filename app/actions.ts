@@ -21,6 +21,8 @@ export const getCanSummarize = async (userId?: string) => {
     .eq("kinde_id", userId)
     .single();
 
+  if (!result) return false;
+
   if (result.free_summaries > 0) {
     return true;
   }
