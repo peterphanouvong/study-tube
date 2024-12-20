@@ -50,6 +50,9 @@ export default async function Home() {
                 <RiStarFill className="md:w-5 md:h-5" />
                 <RiStarFill className="md:w-5 md:h-5" />
               </div>
+              <div className="text-muted-foreground text-sm">
+                Chrome Web Store
+              </div>
             </div>
             <h1 className="text-4xl md:text-[80px] md:leading-none font-bold tracking-tighter mb-9 font-spaceGrotesk">
               Stop <span className="text-blue-500">wasting</span> your
