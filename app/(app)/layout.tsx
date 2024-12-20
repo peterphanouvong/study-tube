@@ -1,4 +1,3 @@
-import { Logo } from "@/components/logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,7 +38,14 @@ export default async function Layout(props: {
     <div>
       <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
-          <Logo />
+          <div className="flex items-center gap-2">
+            <Link
+              href="/"
+              className="md:text-xl tracking-tighter font-bold font-spaceGrotesk"
+            >
+              StudyTube
+            </Link>
+          </div>
           <Button variant={"link"} asChild>
             <Link href="/dashboard">Dashboard</Link>
           </Button>

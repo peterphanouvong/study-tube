@@ -1,42 +1,12 @@
-import { GoogleRegisterButton } from "@/components/google-register-button";
 import { Button } from "@/components/ui/button";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 import { FaChrome } from "react-icons/fa6";
-import { RiDashboard3Line, RiStarFill } from "react-icons/ri";
+import { RiStarFill } from "react-icons/ri";
 
 export default async function Home() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="flex justify-between items-center p-6 w-full max-w-7xl mx-auto">
-        <div className="flex items-center gap-2">
-          <Link
-            href="/"
-            className="md:text-xl tracking-tighter font-bold font-spaceGrotesk"
-          >
-            StudyTube
-          </Link>
-        </div>
-        <div className="flex gap-3">
-          {user ? (
-            <>
-              <Button variant={"outline"} asChild>
-                <Link href="/dashboard">
-                  <RiDashboard3Line className="mr-2" /> Dashboard
-                </Link>
-              </Button>
-            </>
-          ) : (
-            <>
-              <GoogleRegisterButton />
-            </>
-          )}
-        </div>
-      </nav>
-
+    <div className="bg-white">
       <main className="max-w-7xl mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="flex flex-col md:flex-row gap-12 md:mt-32">
