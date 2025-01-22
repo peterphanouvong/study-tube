@@ -41,7 +41,7 @@ export default async function Home() {
             </p>
             <Button
               size="lg"
-              className="bg-blue-600 hover:bg-blue-700 md:h-12 md:text-xl"
+              className="bg-blue-500 hover:bg-blue-6/00 md:h-12 md:text-xl"
               asChild
             >
               <Link
@@ -99,7 +99,7 @@ export default async function Home() {
                 </h3>
                 <Button
                   size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 md:h-12 md:text-xl"
+                  className="bg-blue-500 hover:bg-blue-6/00 md:h-12 md:text-xl"
                   asChild
                 >
                   <Link
@@ -168,7 +168,7 @@ export default async function Home() {
                 </h3>
                 <Button
                   size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 md:h-12 md:text-xl"
+                  className="bg-blue-500 hover:bg-blue-6/00 md:h-12 md:text-xl"
                   asChild
                 >
                   <Link
@@ -222,7 +222,7 @@ export default async function Home() {
           </p>
           <Button
             size="lg"
-            className="bg-blue-600 hover:bg-blue-700 md:h-12 md:text-xl"
+            className="bg-blue-500 hover:bg-blue-6/00 md:h-12 md:text-xl"
             asChild
           >
             <Link
