@@ -12,6 +12,10 @@ export const workflowSettings: WorkflowSettings = {
     "kinde.accessToken": {},
     "kinde.localization": {},
   },
+  name: "Access token custom claims",
+  failurePolicy: {
+    action: "stop",
+  },
 };
 
 export default async function Workflow(event: onUserTokenGeneratedEvent) {
