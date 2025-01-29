@@ -1,8 +1,8 @@
 import {
   onUserTokenGeneratedEvent,
+  accessTokenCustomClaims,
   WorkflowSettings,
   WorkflowTrigger,
-  accessTokenCustomClaims,
 } from "@kinde/infrastructure";
 
 export const workflowSettings: WorkflowSettings = {
@@ -12,13 +12,9 @@ export const workflowSettings: WorkflowSettings = {
     "kinde.accessToken": {},
     "kinde.localization": {},
   },
-  name: "Access token custom claims",
-  failurePolicy: {
-    action: "stop",
-  },
 };
 
-export default async function Workflow(event: onUserTokenGeneratedEvent) {
+export default async function (event: onUserTokenGeneratedEvent) {
   const accessToken = accessTokenCustomClaims<{
     hello: string;
     ipAddress: string;
@@ -26,4 +22,4 @@ export default async function Workflow(event: onUserTokenGeneratedEvent) {
 
   accessToken.hello = "Hello there!";
   accessToken.ipAddress = event.request.ip;
-}
+},
